@@ -259,11 +259,12 @@ def run_daemon(args: list, conf: Config):
     logging.getLogger('aiohttp').setLevel(logging.CRITICAL)
 
     loop = asyncio.get_event_loop()
-    loop.set_task_factory(task_factory)
 
     if args.verbose:
         log.setLevel(logging.DEBUG)
         loop.set_debug(True)
+        log.debug("Task error logging workaround in place.")
+        loop.set_task_factory(task_factory)
     else:
         log.setLevel(logging.INFO)
 
